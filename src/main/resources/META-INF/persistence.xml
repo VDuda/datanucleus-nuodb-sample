@@ -58,7 +58,6 @@
             <property name="datanucleus.validateTables" value="false"/>
             <property name="datanucleus.validateConstraints" value="false"/>
             <property name="datanucleus.connectionPoolingType" value="BoneCP"/>
-            <property name="datanucleus.mapping.Schema " value="nucleus"/>
         </properties>
     </persistence-unit>
 

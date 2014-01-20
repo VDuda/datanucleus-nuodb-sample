@@ -20,21 +20,3 @@ Maven Instructions
 
 4. Run the command *mvn datanucleus:schema-delete*. This deletes the schema for
    the tutorial
-
-
-Ant instructions
-================
-1. Create a directory **lib** and add the following jars to it : jdo-api.jar,
-   datanucleus-core.jar, datanucleus-api.jdo.jar, datanucleus-{store}.jar,
-log4j.jar, {your-database-driver}.jar
-
-2. Run the command *ant clean compile enhance*. This builds everything and
-   enhances the classes
-
-3. Run the command *ant createschema*. This creates the schema for the
-   tutorial.
-
-4. Run the command *ant runtutorial*. This runs the tutorial.
-
-5. Run the command *ant deleteschema*. This deletes the schema for the
-   tutorial.
