@@ -13,6 +13,7 @@ notifications:
     - buck.robert.j@gmail.com
 
 before_install:
+  - pwd
   - wget -q http://www.nuodb.com/latest/releases/nuodb-2.0.linux.x64.deb --output-document=/var/tmp/nuodb.deb
   - sudo dpkg -i /var/tmp/nuodb.deb
   - git clone https://github.com/rbuck/datanucleus-nuodb-plugin.git ~/rbuck/datanucleus-nuodb-plugin
@@ -20,7 +21,9 @@ before_install:
 
 script:
   - ls -al ~/
-  - cd rbuck/datanucleus-nuodb-sample
+  - ls -al ~/build
+  - ls -al ~/builds
+  - cd ~/rbuck/datanucleus-nuodb-sample
   - ls -al
   - ./manage.sh startsm
   - ./manage.sh startte

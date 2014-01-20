@@ -19,12 +19,10 @@ popd >/dev/null
 : ${DATABASE_DDL:="test_ddl.sql"}
 : ${NODE_PORT_RANGE:="48010,48099"}
 : ${STORAGE_DIR:="/var/opt/nuodb"}
-: ${ARCHIVE_DIR:="${STORAGE_DIR}/archive"}
+: ${ARCHIVE_DIR:="${STORAGE_DIR}/production-archives"}
 : ${ARCHIVE_URL:="${ARCHIVE_DIR}/${DATABASE_NAME}"}
-: ${JOURNAL_DIR:="${STORAGE_DIR}/journal"}
-: ${JOURNAL_URL:="${JOURNAL_DIR}/${DATABASE_NAME}"}
-: ${LOGS_DIR:="/var/log/nuodb"}
-: ${LOG_FILE:="${LOGS_DIR}/server.log"}
+: ${LOGS_DIR:="/var/tmp"}
+: ${LOG_FILE:="${LOGS_DIR}/manage-script.log"}
 : ${ENGINE_ARGS:="--mem 8G --commit remote:1 --verbose info,warn,net,error"}
 
 NUODB_MANAGER="java -jar ${NUODB_HOME}/jar/nuodbmanager.jar --user ${BROKER_DOMAIN} --password ${BROKER_DOMAIN_PASSWORD} --broker ${BROKER_HOST}:${BROKER_PORT} --command"
@@ -84,16 +82,13 @@ function startsm()
     echo "[INFO] Starting archive manager and recreating database" | tee -a ${LOG_FILE}
     if [ ! -f "${ARCHIVE_URL}/1.atm" ]; then
         mkdir -p "${ARCHIVE_DIR}"
-        if [ ! -d "${JOURNAL_DIR}" ]; then
-            mkdir -p "${JOURNAL_DIR}"
-        fi
-        SM_ARGS="${ENGINE_ARGS} --log ${LOGS_DIR}/sm.log --journal enable journal-dir ${JOURNAL_URL}"
+        SM_ARGS="${ENGINE_ARGS} --log ${LOGS_DIR}/sm.log --journal enable"
         echo -e "\tExecute: ${NUODB_MANAGER} start process sm archive ${ARCHIVE_URL} host ${BROKER_HOST}:${BROKER_PORT} database ${DATABASE_NAME} initialize yes options '${SM_ARGS}'"
         ${NUODB_MANAGER} "start process sm archive ${ARCHIVE_URL} host ${BROKER_HOST}:${BROKER_PORT} database ${DATABASE_NAME} initialize yes options '${SM_ARGS}'" | tee -a ${LOGS_DIR}/${DATABASE_NAME}-manager.log
         sleep 2
     else
         echo "[INFO] Restarting storage manager with existing archive" | tee -a ${LOGS_DIR}/${DATABASE_NAME}-manager.log
-        SM_ARGS="${ENGINE_ARGS} --log ${LOGS_DIR}/sm.log --journal enable journal-dir ${JOURNAL_URL}"
+        SM_ARGS="${ENGINE_ARGS} --log ${LOGS_DIR}/sm.log --journal enable"
         echo -e "\tExecute: ${NUODB_MANAGER} start process sm archive ${ARCHIVE_URL} host ${BROKER_HOST}:${BROKER_PORT} database ${DATABASE_NAME} initialize no options '${SM_ARGS}'"
         ${NUODB_MANAGER} "start process sm archive ${ARCHIVE_URL} host ${BROKER_HOST}:${BROKER_PORT} database ${DATABASE_NAME} initialize no options '${SM_ARGS}'" | tee -a ${LOGS_DIR}/${DATABASE_NAME}-manager.log
         sleep 2
