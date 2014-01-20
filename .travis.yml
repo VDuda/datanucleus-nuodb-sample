@@ -19,6 +19,7 @@ before_install:
   - cd ~/datanucleus-nuodb-plugin && mvn clean install -Dmaven.test.skip=true
 
 script:
+  - cd ~/datanucleus-nuodb-sample
   - ls -al
   - ./manage.sh startsm
   - ./manage.sh startte
