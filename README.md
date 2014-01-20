@@ -1,12 +1,11 @@
-tutorial
+DataNucleus JDO NuoDB Sample
 ========
 
-Simple demonstration of using JDO with DataNucleus.
-You can run this with any supported datastore by simply editing the following
-files
+[<img src="https://api.travis-ci.org/rbuck/datanucleus-nuodb-sample.png?branch=master" alt="Build Status" />](http://travis-ci.org/rbuck/ datanucleus-nuodb-sample)
 
-* <a href="https://github.com/datanucleus/samples-jdo/blob/master/tutorial/src/main/resources/META-INF/persistence.xml">src/main/resources/META-INF/persistence.xml</a>   **[Edit the datastore details here]**
-* <a href="https://github.com/datanucleus/samples-jdo/blob/master/tutorial/pom.xml">pom.xml</a>   **[Edit the dependency jars for your datastore]**
+# Description
+
+Simple demonstration of using JDO with DataNucleus against NuoDB using BoneCP.
 
 Maven Instructions
 ==================
