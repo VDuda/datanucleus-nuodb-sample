@@ -1,0 +1,24 @@
+language: java
+
+jdk:
+  - openjdk7
+  - openjdk6
+  - oraclejdk7
+
+env:
+  - NUODB_HOME=/opt/nuodb NUODB_USERNAME=cloud NUODB_PASSWORD=user
+
+notifications:
+  recipients:
+    - buck.robert.j@gmail.com
+
+before_install:
+  - wget -q http://www.nuodb.com/latest/releases/nuodb-2.0.linux.x64.deb --output-document=/var/tmp/nuodb.deb
+  - sudo dpkg -i /var/tmp/nuodb.deb
+  - git clone https://github.com/rbuck/datanucleus-nuodb-plugin.git ~/datanucleus-nuodb-plugin
+  - cd ~/datanucleus-nuodb-plugin && mvn clean install -DskipTests
+
+script:
+  - ./manage.sh startsm
+  - ./manage.sh startte
+  - mvn clean install test
