@@ -16,7 +16,7 @@ before_install:
   - wget -q http://www.nuodb.com/latest/releases/nuodb-2.0.linux.x64.deb --output-document=/var/tmp/nuodb.deb
   - sudo dpkg -i /var/tmp/nuodb.deb
   - git clone https://github.com/rbuck/datanucleus-nuodb-plugin.git ~/datanucleus-nuodb-plugin
-  - cd ~/datanucleus-nuodb-plugin && mvn clean install -DskipTests
+  - cd ~/datanucleus-nuodb-plugin && mvn clean install -Dmaven.test.skip=true
 
 script:
   - ./manage.sh startsm
