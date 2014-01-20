@@ -13,18 +13,13 @@ notifications:
     - buck.robert.j@gmail.com
 
 before_install:
-  - pwd
   - wget -q http://www.nuodb.com/latest/releases/nuodb-2.0.linux.x64.deb --output-document=/var/tmp/nuodb.deb
   - sudo dpkg -i /var/tmp/nuodb.deb
   - git clone https://github.com/rbuck/datanucleus-nuodb-plugin.git ~/build/rbuck/datanucleus-nuodb-plugin
   - (cd ~/build/rbuck/datanucleus-nuodb-plugin && mvn clean install -Dmaven.test.skip=true)
 
 script:
-  - ls -al ~/
-  - ls -al ~/build
-  - ls -al ~/builds
   - cd ~/build/rbuck/datanucleus-nuodb-sample
-  - ls -al
   - ./manage.sh startsm
   - ./manage.sh startte
   - mvn clean install test
