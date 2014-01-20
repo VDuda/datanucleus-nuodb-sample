@@ -15,11 +15,11 @@ notifications:
 before_install:
   - wget -q http://www.nuodb.com/latest/releases/nuodb-2.0.linux.x64.deb --output-document=/var/tmp/nuodb.deb
   - sudo dpkg -i /var/tmp/nuodb.deb
-  - git clone https://github.com/rbuck/datanucleus-nuodb-plugin.git ~/datanucleus-nuodb-plugin
-  - cd ~/datanucleus-nuodb-plugin && mvn clean install -Dmaven.test.skip=true
+  - git clone https://github.com/rbuck/datanucleus-nuodb-plugin.git ~/rbuck/datanucleus-nuodb-plugin
+  - cd ~/rbuck/datanucleus-nuodb-plugin && mvn clean install -Dmaven.test.skip=true
 
 script:
-  - cd ~/datanucleus-nuodb-sample
+  - cd ~/rbuck/datanucleus-nuodb-sample
   - ls -al
   - ./manage.sh startsm
   - ./manage.sh startte
