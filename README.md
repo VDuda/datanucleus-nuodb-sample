@@ -1,7 +1,7 @@
 DataNucleus JDO NuoDB Sample
 ========
 
-[<img src="https://api.travis-ci.org/rbuck/datanucleus-nuodb-sample.png?branch=master" alt="Build Status" />](http://travis-ci.org/rbuck/datanucleus-nuodb-sample)
+[<img src="https://api.travis-ci.org/nuodb/datanucleus-nuodb-sample.png?branch=master" alt="Build Status" />](http://travis-ci.org/nuodb/datanucleus-nuodb-sample)
 
 # Description
 
